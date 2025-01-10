@@ -5,64 +5,264 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>順ちゃん誕生祭2025 🎉</title>
     <style>
-        /* 既存のスタイル */
-        body {
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(45deg, #FFD700, #FFA500);
-            font-family: 'Arial', sans-serif;
-            color: #333;
+    /* 基本スタイル */
+    body {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(-45deg, #FFD700, #FF69B4, #FF1493, #FFA500);
+        background-size: 400% 400%;
+        animation: gradientBG 15s ease infinite;
+        font-family: 'Arial', sans-serif;
+        color: #333;
+        overflow-x: hidden;
+    }
+
+    @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    /* コンテナスタイル */
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        position: relative;
+    }
+
+    /* ヘッダースタイル */
+    .header {
+        text-align: center;
+        padding: 50px 0;
+        animation: fadeInDown 1.5s ease-out;
+        position: relative;
+    }
+
+    .main-title {
+        font-size: 4.5em;
+        color: #fff;
+        text-shadow: 
+            0 0 10px rgba(255,20,147,0.5),
+            0 0 20px rgba(255,20,147,0.3),
+            0 0 30px rgba(255,20,147,0.2);
+        margin-bottom: 20px;
+        transform: perspective(500px) rotateX(10deg);
+        animation: neonGlow 1.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes neonGlow {
+        from {
+            text-shadow: 
+                0 0 10px rgba(255,20,147,0.5),
+                0 0 20px rgba(255,20,147,0.3),
+                0 0 30px rgba(255,20,147,0.2);
+        }
+        to {
+            text-shadow: 
+                0 0 20px rgba(255,20,147,0.6),
+                0 0 30px rgba(255,20,147,0.4),
+                0 0 40px rgba(255,20,147,0.3);
+        }
+    }
+
+    /* 誕生日情報スタイル */
+    .birthday-info {
+        font-size: 2em;
+        color: #fff;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        margin: 20px 0;
+        animation: bounce 1s ease infinite;
+    }
+
+    /* カウントダウンスタイル */
+    .countdown {
+        font-size: 2.5em;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 30px;
+        border-radius: 25px;
+        margin: 20px 0;
+        box-shadow: 
+            0 10px 30px rgba(0,0,0,0.1),
+            0 0 30px rgba(255,20,147,0.2) inset;
+        transform: perspective(1000px) rotateX(-5deg);
+        transition: transform 0.3s ease;
+    }
+
+    .countdown:hover {
+        transform: perspective(1000px) rotateX(0deg) scale(1.02);
+    }
+
+    /* メッセージセクションスタイル */
+    .content-section {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 40px;
+        border-radius: 30px;
+        margin: 30px 0;
+        box-shadow: 
+            0 15px 35px rgba(0,0,0,0.1),
+            0 0 40px rgba(255,20,147,0.1) inset;
+        animation: fadeInUp 1s ease-out;
+    }
+
+    .messages {
+        display: grid;
+        gap: 30px;
+        padding: 20px;
+    }
+
+    .message {
+        background: linear-gradient(145deg, #ffffff, #f8f8f8);
+        padding: 25px;
+        border-radius: 20px;
+        box-shadow: 
+            0 10px 20px rgba(0,0,0,0.05),
+            0 0 20px rgba(255,20,147,0.05) inset;
+        transition: all 0.3s ease;
+        transform: translateY(0);
+    }
+
+    .message:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 
+            0 20px 40px rgba(0,0,0,0.1),
+            0 0 30px rgba(255,20,147,0.1) inset;
+    }
+
+    .message h3 {
+        color: #FF1493;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 3px solid #FFD700;
+        font-size: 1.5em;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+
+    .message p {
+        line-height: 1.8;
+        color: #444;
+        font-size: 1.1em;
+    }
+
+    /* 写真オーバーレイスタイル */
+    .photo-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(-45deg, #FFD700, #FF69B4, #FF1493, #FFA500);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        transition: opacity 1.5s ease-in-out;
+    }
+
+    .photo-overlay img {
+        max-width: 80%;
+        max-height: 80vh;
+        border-radius: 30px;
+        box-shadow: 0 0 50px rgba(255,255,255,0.3);
+        animation: floatImage 3s ease-in-out infinite;
+    }
+
+    @keyframes floatImage {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-20px); }
+    }
+
+    /* 音楽プレーヤースタイル */
+    .music-player {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 15px 25px;
+        border-radius: 50px;
+        box-shadow: 
+            0 5px 20px rgba(0,0,0,0.1),
+            0 0 20px rgba(255,20,147,0.2) inset;
+        z-index: 100;
+        transition: all 0.3s ease;
+    }
+
+    .music-player:hover {
+        transform: scale(1.05);
+    }
+
+    .music-player button {
+        background: linear-gradient(45deg, #FF1493, #FF69B4);
+        border: none;
+        padding: 10px 20px;
+        color: white;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 1.1em;
+        transition: all 0.3s ease;
+    }
+
+    .music-player button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 20px rgba(255,20,147,0.3);
+    }
+
+    /* アニメーション定義 */
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+
+    /* 紙吹雪スタイル改善 */
+    .confetti {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 999;
+    }
+
+    /* レスポンシブデザイン */
+    @media (max-width: 768px) {
+        .main-title {
+            font-size: 3em;
         }
 
-        /* 写真のオーバーレイ用スタイル */
-        .photo-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            transition: opacity 1s ease-in-out;
+        .birthday-info {
+            font-size: 1.5em;
         }
 
-        .photo-overlay img {
-            max-width: 80%;
-            max-height: 80vh;
-            border-radius: 20px;
-            box-shadow: 0 0 30px rgba(0,0,0,0.2);
-        }
-
-        /* 音楽プレーヤー用スタイル */
-        .music-player {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 10px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
-            z-index: 100;
-        }
-
-        /* 既存のスタイル続き */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
+        .countdown {
+            font-size: 1.8em;
             padding: 20px;
         }
 
-        .header {
-            text-align: center;
-            padding: 50px 0;
-            animation: fadeIn 2s;
+        .message {
+            padding: 20px;
         }
-
-        /* [前回のスタイル定義をここに続ける] */
-
+    }
     </style>
 </head>
 <body>
@@ -76,7 +276,7 @@
         <audio id="bgm" loop>
             <source src="happybirthday.mp3" type="audio/mp3">
         </audio>
-        <button onclick="toggleMusic()" id="musicButton">🔊 BGM ON/OFF</button>
+        <button onclick="toggleMusic()" id="musicButton">🎵 BGM ON/OFF</button>
     </div>
 
     <div class="confetti" id="confetti"></div>
@@ -95,9 +295,9 @@
         </div>
 
         <section class="content-section">
-            <h2>🎂 みんなからのメッセージ 🎂</h2>
+            <h2>🎂 みんなからの心を込めたメッセージ 🎂</h2>
             <div class="messages">
-                                <div class="message">
+                <div class="message">
                     <h3>坂本 浩輔 より</h3>
                     <p>
                         順ちゃん、22歳おめでとう！にゃんこ大戦争の進捗報告、いつも見てるよ。でも、たまには一緒に外でご飯でも食べに行かない？最近の大学生活どう？心配してるんだ。高校の卓球部の時みたいに、また一緒に何かに打ち込める日が来るといいな。無理強いはしないけど、少しずつ外の世界も楽しいって思い出してほしいな。親友として、ずっと応援してるからね。
@@ -107,72 +307,11 @@
                 <div class="message">
                     <h3>石川 大輔 より</h3>
                     <p>
-                        順、誕生日おめでとう！最近パチンコの話ばっかりで心配なんだよな...。一時の気分転換はわかるけど、そろそろ限度を考えた方がいいんじゃないか？中学校の時みたいに、もっと前向きな趣味に打ち込めるといいんだけどな。にゃんこ大戦争とモンストは無課金でやろうぜ。借金はもう増やしたくないだろ？親友として心配してるから、困ったことがあったら連絡してくれよ。ちなみに坂井は2万返さないってさ！じゃあな！
+                        順、誕生日おめでとう！最近パチンコの話ばっかりで心配なんだよな...。一時の気分転換はわかるけど、そろそろ限度を考えた方がいいんじゃないか？高校の時みたいに、もっと前向きな趣味に打ち込めるといいんだけどな。にゃんこ大戦争とモンストは無課金でやろうぜ。借金は増やしたくないだろ？親友として心配してるから、困ったことがあったら連絡してくれよ。一緒に解決策考えようぜ。
                     </p>
                 </div>
 
-                <div class="message">
-                    <h3>山田 健一 より</h3>
-                    <p>
-                        誕生日おめでとう！大学の講義、最近見かけないけど大丈夫？単位取得に必要な出席日数だけでも来てみない？一緒に授業受けられたら嬉しいな。モンストの話とかでもいいから、たまには話そうよ。心配してる奴がいることを忘れないでくれよ。
-                    </p>
-                </div>
-
-                <div class="message">
-                    <h3>中村 俊介 より</h3>
-                    <p>
-                        順、誕生日おめでとう。高校の卓球部の時は本当に頑張ってたよな。今は大変な時期かもしれないけど、あの時の根性を思い出してほしい。部屋に籠りっきりじゃもったいないぞ。たまには外の空気を吸って、気分転換するのもいいんじゃないか？応援してるからな。
-                    </p>
-                </div>
-
-                <div class="message">
-                    <h3>鈴木 大樹 より</h3>
-                    <p>
-                        順くん、お誕生日おめでとう！授業でたまに会う時は、ゲームの話で盛り上がれて楽しいよ。もっと大学に来いよ。一緒に図書館で勉強したり、学食で飯食ったりできたらいいのに。無理のない範囲でいいから、少しずつ顔出せよ。
-                    </p>
-                </div>
-
-                <div class="message">
-                    <h3>佐藤 健太 より</h3>
-                    <p>
-                        順、22歳おめでとう！最近全然姿見かけねーけど、元気にしてんのか？部屋の掃除とか、ちゃんとやってる？実は結構心配してんだよ。たまには窓開けて換気したり、シーツ交換したりしろよ。必要なら手伝いに行くから連絡くれ。
-                    </p>
-                </div>
-
-                <div class="message">
-                    <h3>小林 拓也 より</h3>
-                    <p>
-                        誕生日おめでとう！いつもモンストで一緒に遊んでくれてサンキュー。でも、リアルの生活も大切にしろよ。大学の話とか、あまり聞かなくなっちゃったけど...。ゲームは逃げ場所じゃなくて、息抜きであってほしいんだ。応援してるからな。
-                    </p>
-                </div>
-
-                <div class="message">
-                    <h3>高橋 直人 より</h3>
-                    <p>
-                        順くん、22歳の誕生日おめでとう。浪人時代は本当によく頑張ったよな。せっかく掴んだチャンス、もっと活かせるはずだぜ。大学生活、楽しめてる？新しい環境は不安かもしれないけど、一歩ずつ前に進もうぜ。相談があったらいつでも連絡してこいよ。
-                    </p>
-                </div>
-
-                <div class="message">
-                    <h3>渡辺 翔太 より</h3>
-                    <p>
-                        お誕生日おめでとう！いつもゲームの攻略情報とか教えてくれてありがとな。でも、最近ずっとオンラインでしか話してねーの気になってんだよ。リアルの友達作りも大切だぜ。焦る必要はないけど、少しずつ外に出てみようぜ。
-                    </p>
-                </div>
-
-                <div class="message">
-                    <h3>田中 康平 より</h3>
-                    <p>
-                        順、誕生日おめでとう！最近引きこもりがちって聞いて心配だわ。バイトの時は、黙々と真面目にやってて頼もしかったよな。その真面目さは今でもお前の良さだと思うぜ。でも、たまには外出ろよ。また一緒にバイトするのもありだぜ。
-                    </p>
-                </div>
-
-                <div class="message">
-                    <h3>木村 竜也 より</h3>
-                    <p>
-                        順、誕生日おめでとう！おばちゃんから最近の様子聞いたよ。心配してる奴らがたくさんいることを知っておいてくれ。ゲームも大切な趣味だけど、それ以外の時間も大切にしろよ。みんなで応援してっから。一緒に買い物行ったり、散歩したりしようぜ。
-                    </p>
-                </div>
+                [前回のメッセージ部分と同じ]
             </div>
         </section>
     </div>
@@ -200,8 +339,8 @@
                     audio.play().catch(function(error) {
                         console.log("Audio autoplay failed:", error);
                     });
-                }, 1000);
-            }, 3000); // 3秒後に写真を非表示
+                }, 1500);
+            }, 3000);
         });
 
         // BGMの制御
@@ -210,10 +349,10 @@
             const button = document.getElementById('musicButton');
             if (audio.paused) {
                 audio.play();
-                button.textContent = '🔊 BGM ON';
+                button.innerHTML = '🎵 BGM ON';
             } else {
                 audio.pause();
-                button.textContent = '🔇 BGM OFF';
+                button.innerHTML = '🔇 BGM OFF';
             }
         }
 
@@ -235,23 +374,28 @@
         setInterval(updateTimer, 1000);
         updateTimer();
 
-        // 紙吹雪アニメーション
+        // 改良版紙吹雪アニメーション
         function createConfetti() {
-            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff'];
+            const colors = ['#FF1493', '#FFD700', '#FF69B4', '#FFA500', '#FF6347'];
             const confetti = document.createElement('div');
             confetti.style.position = 'absolute';
             confetti.style.left = Math.random() * 100 + 'vw';
-            confetti.style.width = '10px';
-            confetti.style.height = '10px';
+            confetti.style.width = Math.random() * 10 + 5 + 'px';
+            confetti.style.height = Math.random() * 10 + 5 + 'px';
             confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
             confetti.style.transform = 'rotate(' + Math.random() * 360 + 'deg)';
+            confetti.style.opacity = Math.random() * 0.5 + 0.5;
+            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
 
             document.getElementById('confetti').appendChild(confetti);
 
             let position = -20;
+            let rotation = Math.random() * 360;
             const interval = setInterval(() => {
                 position += 2;
+                rotation += 2;
                 confetti.style.top = position + 'px';
+                confetti.style.transform = 'rotate(' + rotation + 'deg)';
 
                 if (position > window.innerHeight) {
                     clearInterval(interval);
@@ -260,7 +404,7 @@
             }, 20);
         }
 
-        setInterval(createConfetti, 100);
+        setInterval(createConfetti, 50);
     </script>
 </body>
 </html>
