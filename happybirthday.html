@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>順ちゃん誕生祭2025 🎉</title>
     <style>
+        /* 既存のスタイル */
         body {
             margin: 0;
             padding: 0;
@@ -13,6 +14,41 @@
             color: #333;
         }
 
+        /* 写真のオーバーレイ用スタイル */
+        .photo-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .photo-overlay img {
+            max-width: 80%;
+            max-height: 80vh;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.2);
+        }
+
+        /* 音楽プレーヤー用スタイル */
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+
+        /* 既存のスタイル続き */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -25,92 +61,24 @@
             animation: fadeIn 2s;
         }
 
-        .main-title {
-            font-size: 4em;
-            color: #FF1493;
-            text-shadow: 3px 3px 0 #fff;
-            margin-bottom: 20px;
-        }
+        /* [前回のスタイル定義をここに続ける] */
 
-        .countdown {
-            font-size: 2em;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 15px;
-            margin: 20px 0;
-        }
-
-        .content-section {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 30px;
-            border-radius: 20px;
-            margin: 20px 0;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-        }
-
-        .birthday-info {
-            text-align: center;
-            font-size: 1.5em;
-            margin: 20px 0;
-        }
-
-        .confetti {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 999;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .messages {
-            display: grid;
-            gap: 20px;
-            padding: 20px;
-        }
-
-        .message {
-            background: linear-gradient(145deg, #ffffff, #f0f0f0);
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .message:hover {
-            transform: translateY(-5px);
-        }
-
-        .message h3 {
-            color: #4a4a4a;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #FFD700;
-            padding-bottom: 5px;
-        }
-
-        .message p {
-            line-height: 1.6;
-            color: #333;
-        }
-
-        .social-links {
-            text-align: center;
-            margin: 30px 0;
-        }
-
-        .social-links a {
-            margin: 0 10px;
-            color: #FF1493;
-            text-decoration: none;
-            font-size: 1.2em;
-        }
     </style>
 </head>
 <body>
+    <!-- 写真オーバーレイ -->
+    <div class="photo-overlay" id="photoOverlay">
+        <img src="juntyan.jpg" alt="順ちゃん">
+    </div>
+
+    <!-- 音楽プレーヤー -->
+    <div class="music-player">
+        <audio id="bgm" loop>
+            <source src="happybirthday.mp3" type="audio/mp3">
+        </audio>
+        <button onclick="toggleMusic()" id="musicButton">🔊 BGM ON/OFF</button>
+    </div>
+
     <div class="confetti" id="confetti"></div>
     
     <div class="container">
@@ -129,10 +97,17 @@
         <section class="content-section">
             <h2>🎂 みんなからのメッセージ 🎂</h2>
             <div class="messages">
-                <div class="message">
+                                <div class="message">
                     <h3>坂本 浩輔 より</h3>
                     <p>
                         順ちゃん、22歳おめでとう！にゃんこ大戦争の進捗報告、いつも見てるよ。でも、たまには一緒に外でご飯でも食べに行かない？最近の大学生活どう？心配してるんだ。高校の卓球部の時みたいに、また一緒に何かに打ち込める日が来るといいな。無理強いはしないけど、少しずつ外の世界も楽しいって思い出してほしいな。親友として、ずっと応援してるからね。
+                    </p>
+                </div>
+
+                <div class="message">
+                    <h3>石川 大輔 より</h3>
+                    <p>
+                        順、誕生日おめでとう！最近パチンコの話ばっかりで心配なんだよな...。一時の気分転換はわかるけど、そろそろ限度を考えた方がいいんじゃないか？高校の時みたいに、もっと前向きな趣味に打ち込めるといいんだけどな。にゃんこ大戦争とモンストは無課金でやろうぜ。借金は増やしたくないだろ？親友として心配してるから、困ったことがあったら連絡してくれよ。一緒に解決策考えようぜ。
                     </p>
                 </div>
 
@@ -163,7 +138,8 @@
                         順、22歳おめでとう！最近全然姿見かけねーけど、元気にしてんのか？部屋の掃除とか、ちゃんとやってる？実は結構心配してんだよ。たまには窓開けて換気したり、シーツ交換したりしろよ。必要なら手伝いに行くから連絡くれ。
                     </p>
                 </div>
-                                <div class="message">
+
+                <div class="message">
                     <h3>小林 拓也 より</h3>
                     <p>
                         誕生日おめでとう！いつもモンストで一緒に遊んでくれてサンキュー。でも、リアルの生活も大切にしろよ。大学の話とか、あまり聞かなくなっちゃったけど...。ゲームは逃げ場所じゃなくて、息抜きであってほしいんだ。応援してるからな。
@@ -202,6 +178,45 @@
     </div>
 
     <script>
+        // iOS向けのオーディオ再生対応
+        document.body.addEventListener('touchstart', function() {
+            const audio = document.getElementById('bgm');
+            if (audio.paused) {
+                audio.play().catch(function(error) {
+                    console.log("Audio play failed:", error);
+                });
+            }
+        }, { once: true });
+
+        // 写真オーバーレイの制御
+        window.addEventListener('DOMContentLoaded', (event) => {
+            setTimeout(() => {
+                const overlay = document.getElementById('photoOverlay');
+                overlay.style.opacity = '0';
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                    // 写真が消えた後にBGMを自動再生
+                    const audio = document.getElementById('bgm');
+                    audio.play().catch(function(error) {
+                        console.log("Audio autoplay failed:", error);
+                    });
+                }, 1000);
+            }, 3000); // 3秒後に写真を非表示
+        });
+
+        // BGMの制御
+        function toggleMusic() {
+            const audio = document.getElementById('bgm');
+            const button = document.getElementById('musicButton');
+            if (audio.paused) {
+                audio.play();
+                button.textContent = '🔊 BGM ON';
+            } else {
+                audio.pause();
+                button.textContent = '🔇 BGM OFF';
+            }
+        }
+
         // カウントダウンタイマー
         function updateTimer() {
             const birthday = new Date('2025-01-11T00:00:00');
