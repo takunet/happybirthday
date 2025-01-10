@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="ja">
+    <meta name="timezone" content="Asia/Tokyo">
     <title>順ちゃん誕生祭 🎉</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -43,8 +45,7 @@
                         順ちゃん、22歳おめでとう！にゃんこ大戦争の進捗報告、いつも見てるよ。でも、たまには一緒に外でご飯でも食べに行かない？最近の大学生活どう？心配してるんだ。高校の卓球部の時みたいに、また一緒に何かに打ち込める日が来るといいな。無理強いはしないけど、少しずつ外の世界も楽しいって思い出してほしいな。親友として、ずっと応援してるからね。
                     </p>
                 </div>
-
-                <div class="message">
+                                <div class="message">
                     <h3>石川 大輔 より</h3>
                     <p>
                         順、誕生日おめでとう！最近パチンコの話ばっかりで心配なんだよな...。一時の気分転換はわかるけど、そろそろ限度を考えた方がいいんじゃないか？高校の時みたいに、もっと前向きな趣味に打ち込めるといいんだけどな。にゃんこ大戦争とモンストは無課金でやろうぜ。借金は増やしたくないだろ？親友として心配してるから、困ったことがあったら連絡してくれよ。一緒に解決策考えようぜ。
@@ -78,7 +79,8 @@
                         順、22歳おめでとう！最近全然姿見かけねーけど、元気にしてんのか？部屋の掃除とか、ちゃんとやってる？実は結構心配してんだよ。たまには窓開けて換気したり、シーツ交換したりしろよ。必要なら手伝いに行くから連絡くれ。
                     </p>
                 </div>
-                                <div class="message">
+
+                <div class="message">
                     <h3>小林 拓也 より</h3>
                     <p>
                         誕生日おめでとう！いつもモンストで一緒に遊んでくれてサンキュー。でも、リアルの生活も大切にしろよ。大学の話とか、あまり聞かなくなっちゃったけど...。ゲームは逃げ場所じゃなくて、息抜きであってほしいんだ。応援してるからな。
@@ -91,8 +93,7 @@
                         順くん、22歳の誕生日おめでとう。浪人時代は本当によく頑張ったよな。せっかく掴んだチャンス、もっと活かせるはずだぜ。大学生活、楽しめてる？新しい環境は不安かもしれないけど、一歩ずつ前に進もうぜ。相談があったらいつでも連絡してこいよ。
                     </p>
                 </div>
-
-                <div class="message">
+                                <div class="message">
                     <h3>渡辺 翔太 より</h3>
                     <p>
                         お誕生日おめでとう！いつもゲームの攻略情報とか教えてくれてありがとな。でも、最近ずっとオンラインでしか話してねーの気になってんだよ。リアルの友達作りも大切だぜ。焦る必要はないけど、少しずつ外に出てみようぜ。
@@ -117,6 +118,47 @@
     </div>
 
     <script>
+        let timeOffset = 0;
+
+        // メイン時刻API (TimeAPI.io)から時刻を取得
+        async function fetchTimeFromMainAPI() {
+            const response = await fetch('https://timeapi.io/api/Time/current/zone?timeZone=Asia/Tokyo');
+            const data = await response.json();
+            return new Date(data.dateTime);
+        }
+
+        // バックアップ時刻API (WorldTimeAPI)から時刻を取得
+        async function fetchTimeFromBackupAPI() {
+            const response = await fetch('http://worldtimeapi.org/api/timezone/Asia/Tokyo');
+            const data = await response.json();
+            return new Date(data.datetime);
+        }
+
+        // 時刻同期を試みる関数
+        async function syncTime() {
+            try {
+                // まずメインAPIを試す
+                const serverTime = await fetchTimeFromMainAPI();
+                timeOffset = serverTime - new Date();
+                console.log('TimeAPI.ioと同期完了:', serverTime.toLocaleString('ja-JP'));
+            } catch (error) {
+                console.log('メインAPI失敗、バックアップを試行中...');
+                try {
+                    // バックアップAPIを試す
+                    const serverTime = await fetchTimeFromBackupAPI();
+                    timeOffset = serverTime - new Date();
+                    console.log('WorldTimeAPIと同期完了:', serverTime.toLocaleString('ja-JP'));
+                } catch (backupError) {
+                    console.error('時刻同期失敗:', backupError);
+                }
+            }
+        }
+
+        // 補正済みの現在時刻を取得する関数
+        function getCurrentTime() {
+            return new Date(Date.now() + timeOffset);
+        }
+
         // iOS向けのオーディオ再生対応
         document.body.addEventListener('touchstart', function() {
             const audio = document.getElementById('bgm');
@@ -156,14 +198,23 @@
             }
         }
 
-        // タイトルとカウントダウンの更新を行う関数
+        // [次のレスポンスに続く]
+                // タイトルとカウントダウンの更新を行う関数
         function updateBirthdayContent() {
-            const now = new Date();
-            let birthday = new Date(now.getFullYear(), 0, 11);
+            // 補正済みの日本時間を取得
+            const now = getCurrentTime();
+            const currentYear = now.getFullYear();
             
+            // 今年の誕生日
+            let birthday = new Date(currentYear, 0, 11); // 1月11日
+            
+            // 誕生日が過ぎている場合は来年の誕生日をターゲットに
             if (now > birthday) {
-                birthday = new Date(now.getFullYear() + 1, 0, 11);
+                birthday = new Date(currentYear + 1, 0, 11);
             }
+
+            // 日本時間での誕生日判定
+            const isBirthday = now.getMonth() === 0 && now.getDate() === 11;
 
             const mainTitle = document.querySelector('.main-title');
             mainTitle.textContent = `🎉 順ちゃん誕生祭${birthday.getFullYear()} 🎉`;
@@ -178,16 +229,20 @@
             const milliseconds = Math.floor((diff % 1000));
 
             const countdownElement = document.getElementById('countdown');
+            const contentSection = document.querySelector('.content-section');
             
-            if (days === 0 && hours === 0 && minutes === 0 && seconds === 0 && milliseconds === 0) {
+            if (isBirthday) {
                 countdownElement.innerHTML = `
                     <div class="birthday-message">
                         <span style="color: #FF1493; font-weight: bold;">
                             🎉 Happy Birthday! 今日で${age}歳になりました！ 🎉
                         </span>
                     </div>
+                    <div style="font-size: 0.5em; margin-top: 10px;">
+                        現在時刻: ${now.toLocaleString('ja-JP')}
+                    </div>
                 `;
-                document.querySelector('.content-section').style.display = 'block';
+                contentSection.style.display = 'block';
             } else {
                 countdownElement.innerHTML = `
                     <div class="countdown-grid">
@@ -212,13 +267,14 @@
                             <span class="countdown-label">ミリ秒</span>
                         </div>
                     </div>
+                    <div style="margin-top: 10px; font-size: 0.5em;">
+                        次の誕生日: ${birthday.getFullYear()}年1月11日<br>
+                        現在時刻: ${now.toLocaleString('ja-JP')}
+                    </div>
                 `;
-                document.querySelector('.content-section').style.display = 'none';
+                contentSection.style.display = 'none';
             }
         }
-
-        setInterval(updateBirthdayContent, 10);
-        updateBirthdayContent();
 
         // 紙吹雪アニメーション
         function createConfetti() {
@@ -250,7 +306,23 @@
             }, 20);
         }
 
-        setInterval(createConfetti, 50);
+        // 初期化関数
+        async function initialize() {
+            await syncTime(); // 初回時刻同期
+            
+            // 1分ごとに時刻同期
+            setInterval(syncTime, 60000);
+            
+            // カウントダウン更新（10ミリ秒ごと）
+            setInterval(updateBirthdayContent, 10);
+            updateBirthdayContent();
+
+            // 紙吹雪の生成（50ミリ秒ごと）
+            setInterval(createConfetti, 50);
+        }
+
+        // アプリケーション開始
+        initialize();
     </script>
 </body>
 </html>
