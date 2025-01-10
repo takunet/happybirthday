@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>順ちゃん誕生祭2025 - 認証ページ 🎂</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(-45deg, #FF69B4, #FFD700, #FF1493, #FFA500);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .auth-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.2);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            color: #333;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .title {
+            font-size: 2.5em;
+            color: #FF1493;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            color: #666;
+        }
+
+        .form-group {
+            margin: 20px 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #FF1493;
+        }
+
+        select {
+            padding: 10px;
+            margin: 5px;
+            border: 2px solid #FFD700;
+            border-radius: 5px;
+            font-size: 1em;
+            background: white;
+            cursor: pointer;
+        }
+
+        button {
+            background: linear-gradient(45deg, #FF1493, #FF69B4);
+            border: none;
+            padding: 15px 40px;
+            color: white;
+            border-radius: 25px;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 20, 147, 0.3);
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 20, 147, 0.4);
+        }
+
+        .sparkles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .error-message {
+            color: #FF1493;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="sparkles" id="sparkles"></div>
+    
+    <div class="auth-container">
+        <h1 class="title">🎉 順ちゃん誕生祭2025 🎉</h1>
+        <p class="subtitle">特別な日をお祝いするために、生年月日を入力してください</p>
+        
+        <div class="form-group">
+            <label>生年月日を選択してください</label>
+            <div>
+                <select id="year">
+                    <option value="">年</option>
+                    <!-- 1990年から2010年まで -->
+                </select>
+                <select id="month">
+                    <option value="">月</option>
+                    <!-- 1月から12月まで -->
+                </select>
+                <select id="day">
+                    <option value="">日</option>
+                    <!-- 1日から31日まで -->
+                </select>
+            </div>
+            <p class="error-message" id="error-message">生年月日が正しくありません</p>
+        </div>
+
+        <button onclick="checkBirthday()">お祝いに参加する 🎂</button>
+    </div>
+
+    <script>
+        // 年の選択肢を生成
+        const yearSelect = document.getElementById('year');
+        for(let i = 1990; i <= 2010; i++) {
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = i + '年';
+            yearSelect.appendChild(option);
+        }
+
+        // 月の選択肢を生成
+        const monthSelect = document.getElementById('month');
+        for(let i = 1; i <= 12; i++) {
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = i + '月';
+            monthSelect.appendChild(option);
+        }
+
+        // 日の選択肢を生成
+        const daySelect = document.getElementById('day');
+        for(let i = 1; i <= 31; i++) {
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = i + '日';
+            daySelect.appendChild(option);
+        }
+
+        function checkBirthday() {
+            const year = document.getElementById('year').value;
+            const month = document.getElementById('month').value;
+            const day = document.getElementById('day').value;
+
+            if(year == 2003 && month == 1 && day == 11) {
+                window.location.href = 'happybirthday.html';
+            } else {
+                if(year && month && day) {
+                    window.location.href = 'https://kids.yahoo.co.jp/';
+                } else {
+                    document.getElementById('error-message').style.display = 'block';
+                }
+            }
+        }
+
+        // キラキラエフェクト
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.style.position = 'absolute';
+            sparkle.style.left = Math.random() * 100 + 'vw';
+            sparkle.style.top = Math.random() * 100 + 'vh';
+            sparkle.style.width = '4px';
+            sparkle.style.height = '4px';
+            sparkle.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 75%)`;
+            sparkle.style.borderRadius = '50%';
+            sparkle.style.animation = 'sparkle 1.5s linear forwards';
+            document.getElementById('sparkles').appendChild(sparkle);
+
+            setTimeout(() => {
+                sparkle.remove();
+            }, 1500);
+        }
+
+        setInterval(createSparkle, 50);
+
+        // キラキラのアニメーションスタイル
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes sparkle {
+                0% {
+                    transform: scale(0) rotate(0deg);
+                    opacity: 0;
+                }
+                50% {
+                    transform: scale(1) rotate(180deg);
+                    opacity: 1;
+                }
+                100% {
+                    transform: scale(0) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
