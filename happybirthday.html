@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>順ちゃん誕生祭2025 🎉</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            font-family: 'Arial', sans-serif;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 50px 0;
+            animation: fadeIn 2s;
+        }
+
+        .main-title {
+            font-size: 4em;
+            color: #FF1493;
+            text-shadow: 3px 3px 0 #fff;
+            margin-bottom: 20px;
+        }
+
+        .countdown {
+            font-size: 2em;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 20px;
+            margin: 20px 0;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .birthday-info {
+            text-align: center;
+            font-size: 1.5em;
+            margin: 20px 0;
+        }
+
+        .confetti {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .messages {
+            display: grid;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .message {
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .message:hover {
+            transform: translateY(-5px);
+        }
+
+        .message h3 {
+            color: #4a4a4a;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #FFD700;
+            padding-bottom: 5px;
+        }
+
+        .message p {
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .social-links {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .social-links a {
+            margin: 0 10px;
+            color: #FF1493;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="confetti" id="confetti"></div>
+    
+    <div class="container">
+        <header class="header">
+            <h1 class="main-title">🎉 順ちゃん誕生祭2025 🎉</h1>
+            <div class="birthday-info">
+                2003年1月11日生まれ<br>
+                22歳のお誕生日おめでとう！
+            </div>
+        </header>
+
+        <div class="countdown" id="countdown">
+            誕生日まであと: <span id="timer"></span>
+        </div>
+
+        <section class="content-section">
+            <h2>🎂 みんなからのメッセージ 🎂</h2>
+            <div class="messages">
+                <div class="message">
+                    <h3>坂本 浩輔 より</h3>
+                    <p>
+                        順ちゃん、22歳おめでとう！にゃんこ大戦争の進捗報告、いつも見てるよ。でも、たまには一緒に外でご飯でも食べに行かない？最近の大学生活どう？心配してるんだ。高校の卓球部の時みたいに、また一緒に何かに打ち込める日が来るといいな。無理強いはしないけど、少しずつ外の世界も楽しいって思い出してほしいな。親友として、ずっと応援してるからね。
+                    </p>
+                </div>
+
+                <div class="message">
+                    <h3>山田 健一 より</h3>
+                    <p>
+                        誕生日おめでとう！大学の講義、最近見かけないけど大丈夫？単位取得に必要な出席日数だけでも来てみない？一緒に授業受けられたら嬉しいな。モンストの話とかでもいいから、たまには話そうよ。心配してる奴がいることを忘れないでくれよ。
+                    </p>
+                </div>
+
+                <div class="message">
+                    <h3>中村 俊介 より</h3>
+                    <p>
+                        順、誕生日おめでとう。高校の卓球部の時は本当に頑張ってたよな。今は大変な時期かもしれないけど、あの時の根性を思い出してほしい。部屋に籠りっきりじゃもったいないぞ。たまには外の空気を吸って、気分転換するのもいいんじゃないか？応援してるからな。
+                    </p>
+                </div>
+
+                <div class="message">
+                    <h3>鈴木 大樹 より</h3>
+                    <p>
+                        順くん、お誕生日おめでとう！授業でたまに会う時は、ゲームの話で盛り上がれて楽しいよ。もっと大学に来いよ。一緒に図書館で勉強したり、学食で飯食ったりできたらいいのに。無理のない範囲でいいから、少しずつ顔出せよ。
+                    </p>
+                </div>
+
+                <div class="message">
+                    <h3>佐藤 健太 より</h3>
+                    <p>
+                        順、22歳おめでとう！最近全然姿見かけねーけど、元気にしてんのか？部屋の掃除とか、ちゃんとやってる？実は結構心配してんだよ。たまには窓開けて換気したり、シーツ交換したりしろよ。必要なら手伝いに行くから連絡くれ。
+                    </p>
+                </div>
+                                <div class="message">
+                    <h3>小林 拓也 より</h3>
+                    <p>
+                        誕生日おめでとう！いつもモンストで一緒に遊んでくれてサンキュー。でも、リアルの生活も大切にしろよ。大学の話とか、あまり聞かなくなっちゃったけど...。ゲームは逃げ場所じゃなくて、息抜きであってほしいんだ。応援してるからな。
+                    </p>
+                </div>
+
+                <div class="message">
+                    <h3>高橋 直人 より</h3>
+                    <p>
+                        順くん、22歳の誕生日おめでとう。浪人時代は本当によく頑張ったよな。せっかく掴んだチャンス、もっと活かせるはずだぜ。大学生活、楽しめてる？新しい環境は不安かもしれないけど、一歩ずつ前に進もうぜ。相談があったらいつでも連絡してこいよ。
+                    </p>
+                </div>
+
+                <div class="message">
+                    <h3>渡辺 翔太 より</h3>
+                    <p>
+                        お誕生日おめでとう！いつもゲームの攻略情報とか教えてくれてありがとな。でも、最近ずっとオンラインでしか話してねーの気になってんだよ。リアルの友達作りも大切だぜ。焦る必要はないけど、少しずつ外に出てみようぜ。
+                    </p>
+                </div>
+
+                <div class="message">
+                    <h3>田中 康平 より</h3>
+                    <p>
+                        順、誕生日おめでとう！最近引きこもりがちって聞いて心配だわ。バイトの時は、黙々と真面目にやってて頼もしかったよな。その真面目さは今でもお前の良さだと思うぜ。でも、たまには外出ろよ。また一緒にバイトするのもありだぜ。
+                    </p>
+                </div>
+
+                <div class="message">
+                    <h3>木村 竜也 より</h3>
+                    <p>
+                        順、誕生日おめでとう！おばちゃんから最近の様子聞いたよ。心配してる奴らがたくさんいることを知っておいてくれ。ゲームも大切な趣味だけど、それ以外の時間も大切にしろよ。みんなで応援してっから。一緒に買い物行ったり、散歩したりしようぜ。
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // カウントダウンタイマー
+        function updateTimer() {
+            const birthday = new Date('2025-01-11T00:00:00');
+            const now = new Date();
+            const diff = birthday - now;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('timer').innerHTML = 
+                `${days}日 ${hours}時間 ${minutes}分 ${seconds}秒`;
+        }
+
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        // 紙吹雪アニメーション
+        function createConfetti() {
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff'];
+            const confetti = document.createElement('div');
+            confetti.style.position = 'absolute';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.width = '10px';
+            confetti.style.height = '10px';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.transform = 'rotate(' + Math.random() * 360 + 'deg)';
+
+            document.getElementById('confetti').appendChild(confetti);
+
+            let position = -20;
+            const interval = setInterval(() => {
+                position += 2;
+                confetti.style.top = position + 'px';
+
+                if (position > window.innerHeight) {
+                    clearInterval(interval);
+                    confetti.remove();
+                }
+            }, 20);
+        }
+
+        setInterval(createConfetti, 100);
+    </script>
+</body>
+</html>
